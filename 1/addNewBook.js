@@ -4,21 +4,32 @@
 
 
 
-function addNewBook() {
+function addNewBook(centerRegion) {
   Ext.BLANK_IMAGE_URL = 'loading.gif';
   Ext.QuickTips.init();
-  var names = [
-	['小说'],
-	['社科类'],
-	['IT类'],
-	['英文类']
-  ];
-
-  var mySimpleStore = new Ext.data.ArrayStore({
-	data   : names,
-	fields : ['name']
-  });
-
+  var remoteJsonStore = new Ext.data.JsonStore({
+	root          : 'records',
+	totalProperty : 'totalCount',
+	baseParams    : {
+		column : 'fullName'
+	},
+	fields     : [
+	
+		{
+            name    : 'name',
+            mapping : 'fullName'
+		}
+		,
+		{
+            name    : 'id',
+            mapping : 'id'
+		}	
+		
+	],
+	proxy : new Ext.data.ScriptTagProxy({
+		url : 'http://localhost:8080/jsontest/type'
+	})
+});
 
               
 
@@ -34,6 +45,7 @@ function addNewBook() {
         width: 1130,
         height:500,
         bodyPadding: 3,
+        id :'addNewBook',
         
 
         
@@ -50,22 +62,22 @@ function addNewBook() {
           }, {
           allowBlank: false,
           fieldLabel: '新书作者',
-          id:'bookisbn',
-          name: 'bookisbn',
-          emptyText: '新书作者'
-          }, {
-          allowBlank: false,
-          fieldLabel: '新书作者',
-          id:'bookisbn',
-          name: 'bookisbn',
+          id:'bookauthor',
+          name: 'bookauthor',
           emptyText: '新书作者'
           },{
-		xtype        : 'combo',
-	    fieldLabel   : '请选择类型',
-	    store        : mySimpleStore,
-	    displayField : 'name',
-	    typeAhead    : true,
-	    mode         : 'local'								
+				xtype          : 'combo',
+				fieldLabel     : 'Search by name',
+				forceSelection : true,
+				displayField   : 'name',
+				valueField : 'id',
+				//tpl		   : tpl,
+				loadingText	   : 'Querying....',
+				//pageSize	   : 20,
+				minChars	   : 1,
+				triggerAction  : 'name',
+				//itemSelector	: 'div.search-item',
+				store		: remoteJsonStore							
           },
            {
           allowBlank: false,
@@ -83,9 +95,12 @@ function addNewBook() {
           emptyText: '出版日期',
           maxValue: new Date()
           },{
-          	xtype : 'htmleditor',
-          	fieldLabel : '请输入内容简介',
-          	anchor:'100% 50%'
+          	xtype          : 'htmleditor',
+			fieldLabel     : "Enter in any text",
+			anchor         : '100% 100%',
+			allowBlank     : false,
+			id			   :'bookdescription',
+			name			   :'bookdescription'
           }],
 
         buttons: [
@@ -122,18 +137,18 @@ function addNewBook() {
   fp.submit = function()
         {
                                    this.form.doAction('submit', {
-                              url: 'http://localhost:8080/jsontest/login',
+                              url: 'http://localhost:8080/jsontest/addNewBook',
                               method: 'post',
                               params: '',
                               success: function(form, action){
                                   
-                                  
-                                      window.location = "manager.html";
+                                  Ext.Msg.alert('success', '新书');
+                                    //  window.location = "manager.html";
                                   
                                       
                               },
                               failure: function(){
-                                  Ext.Msg.alert('错误', '密码错了');
+                                  Ext.Msg.alert('错误', '新书输入失败');
                                  // window.location = "register.html";
                               }
                           });

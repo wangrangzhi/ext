@@ -12,6 +12,9 @@ Ext.onReady(function() {
           bodyPadding : 10
         },
         items : [
+
+
+
             {
                 title       : 'North Panel',
                 region      : 'north',
@@ -19,7 +22,8 @@ Ext.onReady(function() {
                 minHeight   : 100,
                 maxHeight   : 150,
                 html : "<h1>图书管理系统</h1>",
-                collapsible : true
+                collapsible : true,
+                bodyStyle:"background-image:url('bk1.jpg')",
             },
             {
                 title       : 'South Panel',
@@ -51,7 +55,7 @@ Ext.onReady(function() {
                                                      var centerRegion = Ext.getCmp('centerRegion');
 
                                                   centerRegion.remove(centerPanel, true);
-                                                   addNewBook();
+                                                   addNewBook(centerRegion);
                                                   centerRegion.doLayout();  
                                             }
                                         }
@@ -60,7 +64,20 @@ Ext.onReady(function() {
 
                                 },{
                                   xtype : "panel",
-                                  title : "书籍管理"
+                                  title : "书籍管理",
+                                                        listeners: {
+                                                            click: {
+                                                                element: 'el', //bind to the underlying el property on the panel
+                                                                fn: function(){ 
+                                                                          var centerPanel  = Ext.getCmp('fp');
+                                                                         var centerRegion = Ext.getCmp('centerRegion');
+
+                                                                      centerRegion.destroy();
+                                                                       editBook();
+                                                                      centerRegion.doLayout();  
+                                                                }
+                                                            }
+                                                        }
                                 },{
                                   xtype : "panel",
                                   title : "旧书删除"

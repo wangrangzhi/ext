@@ -1,0 +1,16 @@
+
+
+银白色皮肤
+<link rel="stylesheet" type="text/css" href="..\..\ext-5.0.0-gpl\ext-5.0.0\build\packages\ext-theme-crisp\build\resources\ext-theme-crisp-all.css">
+
+
+经典皮肤
+     <link rel="stylesheet" type="text/css" href="../../ext-5.0.0-gpl/ext-5.0.0/build/packages\ext-theme-classic\build\resources\ext-theme-classic-all.css">
+蓝色皮肤
+<link rel="stylesheet" type="text/css" href="../../ext-5.0.0-gpl/ext-5.0.0/build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all.css">
+蓝色皮肤触摸版
+<link rel="stylesheet" type="text/css" href="..\..\ext-5.0.0-gpl\ext-5.0.0\build\packages\ext-theme-neptune-touch\build\resources\ext-theme-neptune-touch-all.css">
+简洁银白色
+<link rel="stylesheet" type="text/css" href="../../ext-5.0.0-gpl/ext-5.0.0/build/packages\ext-theme-gray\build\resources\ext-theme-gray-all.css">
+简洁银白色触摸版
+<link rel="stylesheet" type="text/css" href="..\..\ext-5.0.0-gpl\ext-5.0.0\build\packages\ext-theme-crisp-touch\build\resources\ext-theme-crisp-touch-all.css">
